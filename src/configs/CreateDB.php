@@ -5,7 +5,7 @@ require_once('config.php');
 $dbname = 'note_a_list';
 $host .= (":".$port);
 
-$db = new mysqli($host, $user, $password);
+$db = new \mysqli($host, $user, $password);
 
 if ($db->connect_error)
 {
@@ -30,7 +30,7 @@ else
 $dbtables = ["CREATE TABLE `list` (`list_id` INT UNSIGNED NOT NULL AUTO_INCREMENT, `list_name` VARCHAR(100) NOT NULL, PRIMARY KEY (`list_id`));",
   "CREATE TABLE `list_relationship` ( `parent_id` INT NOT NULL, `child_id` INT NOT NULL);",
   "CREATE TABLE `note_relationship` ( `list_id` INT NOT NULL, `note_id` INT NOT NULL);",
-  "CREATE TABLE `note` ( `note_id` INT UNSIGNED NOT NULL AUTO_INCREMENT, `note_name` VARCHAR(100) NOT NULL, `note_date` DATE NOT NULL, `note_description` VARCHAR(500) NOT NULL, PRIMARY KEY (`note_id`));"];
+  "CREATE TABLE `note` ( `note_id` INT UNSIGNED NOT NULL AUTO_INCREMENT, `note_name` VARCHAR(100) NOT NULL, `note_date` DATE NOT NULL, `note_description` VARCHAR(500) NOT NULL, PRIMARY KEY (`note_id`));", "INSERT INTO `list`(`list_name`) VALUES ('Note-A-List');"];
 
 foreach ($dbtables as $query) {
     if ($db->query($query) === true)
