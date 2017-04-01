@@ -1,4 +1,5 @@
 <?php
+namespace jorgeandco\hw3;
 /**
 *	Database Constants. Change to fit your specific machine.
 */

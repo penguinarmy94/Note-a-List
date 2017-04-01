@@ -1,4 +1,5 @@
 <?php
+namespace jorgeandco\hw3;
 require_once('config.php');
 
 $dbname = 'note_a_list';
