@@ -25,7 +25,7 @@ class SubListView extends View {
                 foreach ($this->arrayLists as $list) {
                     $name = $list['name'];
                     $id = $list['id'];
-                    ?><li><a href=""><?=$name?></a></li><?php
+                    ?><li><a href="index.php?c=SubListView&m=next_sub&arg1=<?=$id?>"><?=$name?></a></li><?php
                 }
                 ?>
             </ul>
@@ -33,13 +33,13 @@ class SubListView extends View {
         <div class="notes-list">
             <h3>Notes</h3>
             <ul>
-                <li>[<a href="">New Note</a>]</li>
+                <li>[<a href="index.php?c=NewNoteView&m=new_note&arg1=<?php echo $this->subListID; ?>">New Note</a>]</li>
                 <?php
                 foreach ($this->arrayNotes as $note) {
                     $name = $note['name'];
                     $date = $note['date'];
                     $id = $note['id'];
-                    ?><li><a href=""><?=$name?> <?=$date?></a></li><?php
+                    ?><li><a href="index.php?c=DisplayNoteView&m=display_note&arg1=<?=$id?>"><?=$name?> <?=$date?></a></li><?php
                 }
                 ?>
             </ul>
