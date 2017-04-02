@@ -1,43 +1,64 @@
 <?php
 namespace jorgeandco\hw3\views;
 require_once('View.php');
+require_once('elements//Navigation.php');
+
+use jorgeandco\hw3\views\elements as ELE;
 
 class LandingView extends View {
 
     private $arrayLists;
     private $arrayNotes;
+	private $element;
+	private $maindir;
+	private $nav;
 
     function __construct($array) {
+		parent::__construct();
         $this->arrayLists = $array['lists'];
         $this->arrayNotes = $array['notes'];
+		$this->maindir = getcwd()."/index.php?c=ListController&m=direct";
+		$this->nav = $array['nav_items'];
+		$this->element = new ELE\Navigation($this->maindir);
     }
 
 
     function render() {
+		$current = $this->nav['list_titles'][0]['id'];
+		$timestamp = date("m/d/Y")." - ".date("h:i:s a");
+		$this->head->render($timestamp);
+		$this->element->renderElement($this->nav);
         ?>
-        <div class="lists-list">
-            <h2>Lists</h2>
+        <div class="lists-list" style="float:left">
             <ul>
-                <li>[<a href="index.php?c=NewListView&m=new_list&arg1=1">New List</a>]</li>
+			 <h2>Lists</h2>
+                <li>[<a href="index.php?c=FormController&m=&arg1=list&arg2=<?=$current?>">New List</a>]</li>
                 <?php
                 foreach ($this->arrayLists as $list) {
                     $name = $list['name'];
                     $id = $list['id'];
-                    ?><li><a href="index.php?c=SubListView&m=next_sub&arg1=<?=$id?>"><?=$name?></a></li><?php
+                    ?><li><a href="index.php?c=ListController&m=direct&arg1=<?=$id?>"><?=$name?></a></li><?php
                 }
                 ?>
             </ul>
         </div>
-        <div class="notes-list">
-            <h3>Notes</h3>
+        <div class="notes-list" style="float:left">
             <ul>
-                <li>[<a href="index.php?c=NewNoteView&m=new_note&arg1=1">New Note</a>]</li>
+			<h2>Notes</h2>
+                <li>[<a href="index.php?c=FormController&m=showForm&arg1=note&arg2=<?=$current?>">New Note</a>]</li>
                 <?php
                 foreach ($this->arrayNotes as $note) {
                     $name = $note['name'];
                     $date = $note['date'];
                     $id = $note['id'];
-                    ?><li><a href="index.php?c=DisplayNoteView&m=display_note&arg1=<?=$id?>"><?=$name?></a></li><?php
+                    ?>
+					<li>
+						<a href="index.php?c=NoteController&m=present_note&arg1=<?=$id?>&arg2=0">
+							<?=$name?>
+						</a> 
+						<?=$date?>
+					</li>
+					<?php
                 }
                 ?>
             </ul>

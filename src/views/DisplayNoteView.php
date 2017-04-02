@@ -10,31 +10,33 @@ class DisplayNoteView extends View
 {
 	private $maindir;
 	private $element;
+	private $nav;
+	private $title;
+	private $content;
 	
-	public function __construct()
+	public function __construct($array)
 	{
 		parent::__construct();
 		date_default_timezone_set("America/Los_Angeles");
 		$this->maindir = getcwd()."/index.php?c=ListController&m=direct";
+		$this->nav = $array['nav_items'];
+		$this->title = $array['name'];
+		$this->content = $array['content'];
+		$this->element = new ELE\Navigation($this->maindir);
 	}
 	
-	public function render($array)
+	public function render()
 	{
-		$nav = $array['nav_items'];
-		$title = $array['name'];
-		$content = $array['content'];
-		
-		$this->element = new ELE\Navigation($this->maindir);
-		$timestamp = date("m/d/Y")." - ".date("h:i:s a");
-		
+		$timestamp = date("m/d/Y")." - ".date("h:i:s a");		
 		$this->head->render($timestamp);
-		$this->element->renderElement($nav);
+		$this->element->renderElement($this->nav);
+		
 		?>
 			<div>
-				<h2>Note: <?=$title?></h2>
+				<h2>Note: <?=$this->title?></h2>
 			</div>
 			<div>
-				<?= $content ?>
+				<?= $this->content ?>
 			</div>
 		
 		<?php

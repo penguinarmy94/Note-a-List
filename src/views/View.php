@@ -17,5 +17,5 @@ abstract class View
 		$this->footer = new LYOT\Footer();
 	}
 	
-    abstract public function render($array);
+    abstract public function render();
 }
