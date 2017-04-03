@@ -7,9 +7,6 @@ require_once('src//controllers//NoteController.php');
 
 use jorgeandco\hw3\controllers as CTR;
 
-static $i = false;
-
-
 if(!isset($_REQUEST['c']))
 {
 	header("Location: index.php?c=ListController&m=direct&arg1=1");
@@ -58,6 +55,7 @@ if (isset($_POST['addnote']))
 		$data['name'] = $_POST['title'];
 		$data['content'] = $_POST['note'];
 		$data['id'] = $_POST['id']; 
+		$data['date'] = date("Y-m-d");
 		$method = $_REQUEST['m'];
 		$class = 'jorgeandco\\hw3\\controllers\\'.$_REQUEST['c'];
 		$object = new $class();

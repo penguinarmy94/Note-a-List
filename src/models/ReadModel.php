@@ -33,7 +33,7 @@ class ReadModel extends Model
 					$i = 0;
 					while($obj = $dbquery->fetch_object())
 					{
-						$list['lists'][$i] = ['name'=>$obj->list_name, 'id'=>$obj->list_id];
+						$list['lists'][$i++] = ['name'=>$obj->list_name, 'id'=>$obj->list_id];
 					}
 					$dbquery->close();
 				}
@@ -41,7 +41,7 @@ class ReadModel extends Model
 				{
 					while($obj = $dbquery->fetch_object())
 					{
-						$list['notes'][$i] = ['name'=>$obj->note_name, 'id'=>$obj->note_id, 'date'=>$obj->note_date];
+						$list['notes'][$i++] = ['name'=>$obj->note_name, 'id'=>$obj->note_id, 'date'=>$obj->note_date];
 					}
 					$dbquery->close();
 				}
@@ -84,22 +84,25 @@ class ReadModel extends Model
 				$parentName = $obj->list_name;
 				$parentID = $obj->list_id;
 				$dbquery->close();
-				if(strcmp($parentName, $array0['name']) != 0) //sublist 3 or more levels
+				if($parentID != $array0['id']) //sublist 3 or more levels
 				{	
 					if($dbquery = $this->db->query($query.$parentID.")"))
 					{
 						$obj = $dbquery->fetch_object();
-						if (strcmp($obj->list_name, $array0['name']) != 0) //sublist more than 3 levels
+						if ($obj->list_id != $array0['id']) //sublist more than 3 levels
 						{
 							$array['num_of_elements'] = 4;
 						}
+						else //sublist 3 levels
+						{
+							$array['num_of_elements'] = 3;
+						}
+						$dbquery->close();
+						$array['list_titles'] = [$array0, ['name'=>$parentName, 'id'=>$parentID], $this->get_child_nav_items($dbquery)];
 					}
-					else //sublist 3 levels
-					{
-						$array['num_of_elements'] = 3;
+					else{
+						return;
 					}
-					$dbquery->close();
-					$array['list_titles'] = [$array0, ['name'=>$parentName, 'id'=>$parentID], $this->get_child_nav_items($dbquery)];
 					
 				}
 				else //sublist 2 levels
@@ -107,14 +110,17 @@ class ReadModel extends Model
 					$array['num_of_elements'] = 2;
 					$array['list_titles'] = [$array0, $this->get_child_nav_items($dbquery)];
 				}
-			}				
+			}
+			else
+			{
+				return;
+			}
 		}
 		else
 		{
 			$array['num_of_elements'] = 1;
 			$array['list_titles'] = [$array0];
 		}
-		
 		return $array;
 		
 	}

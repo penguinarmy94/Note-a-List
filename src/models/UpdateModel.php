@@ -17,17 +17,25 @@ class UpdateModel extends Model
 		{
 			case 'list':
 				$query = "INSERT INTO list(list_name) VALUES('".$array['name']."')";
-				$selectid = "SELECT list_id FROM list WHERE list_name = '".$array['name']."'";
-				$query2 = "INSERT INTO list_relationship VALUES(".$this->mID.",".$array['id'].")";
+				$selectid = "SELECT max(list_id) AS list_id FROM list";
+				$query2 = "INSERT INTO list_relationship VALUES(".$this->mID.",";
 				
 				if(!$this->db->query($query))
 				{
 					echo $this->db->error;
 					exit(1);
 				}
-				if($dbquery = $this->db->query($selectid)
+				if($dbquery = $this->db->query($selectid))
 				{
-					
+					if($obj = $dbquery->fetch_object())
+					{
+						$query2 .= ($obj->list_id.")");
+					}
+					else
+					{
+						echo "ID RETRIEVAL ERROR!";
+						exit(1);
+					}
 				}
 				else
 				{
@@ -41,7 +49,38 @@ class UpdateModel extends Model
 				}
 			break;
 			case 'note':
-				echo "note saved";
+				$query = "INSERT INTO note(note_name, note_description, note_date) 
+							VALUES('".$array['name']."','".$array['content']."','".$array['date']."')";
+				$selectid = "SELECT max(note_id) AS note_id FROM note";
+				$query2 = "INSERT INTO note_relationship VALUES(".$this->mID.",";
+				
+				if(!$this->db->query($query))
+				{
+					echo $this->db->error;
+					exit(1);
+				}
+				if($dbquery = $this->db->query($selectid))
+				{
+					if($obj = $dbquery->fetch_object())
+					{
+						$query2 .= ($obj->note_id.")");
+					}
+					else
+					{
+						echo "ID RETRIEVAL ERROR!";
+						exit(1);
+					}
+				}
+				else
+				{
+					echo "NOTE SAVE ERROR ID RELATIONSHIPS!";
+					exit(1);
+				}
+				if(!$this->db->query($query2))
+				{
+					echo "NOTE SAVE ERROR ID RELATIONSHIPS!";
+					exit(1);
+				}
 			break;
 			default:
 				echo "error saving";
