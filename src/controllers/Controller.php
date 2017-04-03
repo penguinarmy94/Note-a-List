@@ -6,10 +6,10 @@ class Controller
 	protected $model;
 	protected $view;
 	
-	public __construct($view, $model)
+	public function __construct()
 	{
-		this->$model = $model;
-		this->$view = $view;
+		$this->model = 0;
+		$this->view = 0;
 	}
 	
 }

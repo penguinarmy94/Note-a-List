@@ -1,0 +1,108 @@
+ReadModel.data()
+
+/*
+		//nav
+		$list['nav_items'] = $this->navigation();
+		
+		$y = 0;
+		
+		for($i = 0; $i < 10; $i++)
+		{
+			$lista['notes'][$i] = ['name'=>'note'.$y, 'date'=>''.date("Y/m/d"), 'id'=>$y++];
+		}
+		for($i = 0; $i < 10; $i++)
+		{
+			$listb['notes'][$i] = ['name'=>'note'.$y, 'date'=>''.date("Y/m/d"), 'id'=>$y++];
+		}
+		for($i = 0; $i < 10; $i++)
+		{
+			$listc['notes'][$i] = ['name'=>'note'.$y, 'date'=>''.date("Y/m/d"), 'id'=>$y++];
+		}
+		
+		if (strcmp($this->mType, "nav-only") == 0)
+		{
+			return $list;
+		}
+		else if(strcmp($this->mType, "nav") == 0)
+		{				
+			if ($this->mID == 0)
+			{
+				$list['lists'] = [['name'=>'Father', 'id'=>'55']];
+				$list['notes'] = $lista['notes'];
+				
+			}
+			else if ($this->mID == 55)
+			{
+				$list['lists'] = [['name'=>'Mother', 'id'=>'56']];
+				$list['notes'] = $listb['notes'];
+			}
+			else if ($this->mID == 56)
+			{
+				$list['lists'] = [];
+				$list['notes'] = $listc['notes'];
+			}
+			else{
+				echo "error!";
+				exit(1);
+			}
+		}
+		else
+		{
+			for ($i = 0; $i < $y; $i++)
+			{
+				if ($array['id'] == $i)
+				{
+					if ($i < 10)
+					{
+						$list['name'] = $lista['notes'][$i%10]['name'];
+					}
+					else if ($i >= 10 && $i < 20)
+					{
+						$list['name'] = $listb['notes'][$i%10]['name'];
+					}
+					else
+					{
+						$list['name'] = $listc['notes'][$i%10]['name'];
+					}
+					
+					$list['content'] = "this note is a piece of work because bleh! ".$list['name'];
+					break;
+				}
+			}
+		}
+		
+		return $list;
+		*/
+
+ReadModel.navigation()
+
+/*
+		$array0['id'] = 0;
+		$array0['name'] = "Note-a-List";
+		switch($this->mID)
+		{
+			case 0:
+				$arrayl['num_of_elements'] = 1;
+				$arrayl['list_titles'] = [$array0];
+			break;
+			case 55:
+				$array1['id'] = 55;
+				$array1['name'] = "Father";
+				$arrayl['num_of_elements'] = 2;
+				$arrayl['list_titles'] = [$array0, $array1];
+			break;
+			case 56:
+				$array1['id'] = 55;
+				$array1['name'] = "Father";
+				$array2['id'] = 56;
+				$array2['name'] = "Mother";
+				$arrayl['num_of_elements'] = 3;
+				$arrayl['list_titles'] = [$array0, $array1, $array2];
+			break;
+			default:
+				echo "error!";
+				exit(1);
+		}
+		
+		return $arrayl;
+		*/

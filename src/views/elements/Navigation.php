@@ -40,7 +40,7 @@ class Navigation extends Element
 	
 	private function home_nav($array)
 	{
-		$action = $this->mainDir."&arg1=0";
+		$action = $this->mainDir."&arg1=1";
 		?>			
 			<a href="<?= $action ?>"><?= $array[0]['name'] ?></a>
 		<?php

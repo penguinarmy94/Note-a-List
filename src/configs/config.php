@@ -1,9 +1,11 @@
 <?php
 namespace jorgeandco\hw3;
-/**
-*	Database Constants. Change to fit your specific machine.
-*/
-$user = 'root';
-$password = '';
-$host = 'localhost';
-$port = 3306;
+
+class Config
+{
+	const user = 'root';
+	const password = '';
+	const host = 'localhost';
+	const port = 3306;
+	const db = 'note_a_list';
+}

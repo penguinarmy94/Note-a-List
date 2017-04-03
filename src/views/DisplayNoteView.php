@@ -18,10 +18,24 @@ class DisplayNoteView extends View
 	{
 		parent::__construct();
 		date_default_timezone_set("America/Los_Angeles");
-		$this->maindir = getcwd()."/index.php?c=ListController&m=direct";
+		$this->maindir = "index.php?c=ListController&m=direct";
 		$this->nav = $array['nav_items'];
-		$this->title = $array['name'];
-		$this->content = $array['content'];
+		if(!empty($array['name']))
+		{
+			$this->title = $array['name'];
+		}
+		else
+		{
+			$this->title = "No Title";
+		}
+		if(!empty($array['content']))
+		{
+			$this->content = $array['content'];
+		}
+		else
+		{
+			$this->content = "empty content"; 
+		}
 		$this->element = new ELE\Navigation($this->maindir);
 	}
 	

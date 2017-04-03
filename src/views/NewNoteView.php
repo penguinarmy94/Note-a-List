@@ -17,8 +17,8 @@ class NewNoteView extends View
 	{
 		parent::__construct();
 		date_default_timezone_set("America/Los_Angeles");
-		$this->maindir = getcwd()."/index.php?c=ListController&m=direct";
-		$this->savedir = getcwd()."/index.php?c=FormController&m=update";
+		$this->maindir = "index.php?c=ListController&m=direct";
+		$this->savedir = "index.php?c=FormController&m=submit_form";
 		$this->nav = $array['nav_items'];
 		$this->element = new ELE\Navigation($this->maindir);
 		
@@ -48,7 +48,7 @@ class NewNoteView extends View
 					Title: <input type="text" name="title"/><br>
 					Note<br>
 					<textarea rows='8' cols='30' name="note"></textarea><br>
-					<input type="submit" name="save" value="save" />
+					<input type="submit" name="addnote" value="save" />
 					<input type="hidden" name="type" value="note" />
 					<input type="hidden" name="id" value=<?=$this->curr?> />
 				</form>

@@ -17,9 +17,16 @@ class SubListView extends View {
 
     function __construct($array) {
 		parent::__construct();
-        $this->arrayLists = $array['lists'];
-        $this->arrayNotes = $array['notes'];
-		$this->maindir = getcwd()."/index.php?c=ListController&m=direct";
+		
+		if(!empty($array['lists']))
+		{
+			$this->arrayLists = $array['lists'];
+		}
+		if(!empty($array['notes']))
+		{
+			$this->arrayNotes = $array['notes'];
+		}
+		$this->maindir = "index.php?c=ListController&m=direct";
 		$this->nav = $array['nav_items'];
 		$this->element = new ELE\Navigation($this->maindir);
 		if ($array['nav_items']['num_of_elements'] == 2)
@@ -43,13 +50,16 @@ class SubListView extends View {
         <div class="lists-list" style="float:left">
             <ul>
 				 <h2>Lists</h2>
-                <li>[<a href= "index.php?c=FormController&m=show_form&arg1=2&arg2=<?= $this->subListID; ?>" >New List</a>]</li>
+                <li>[<a href= "index.php?c=FormController&m=show_form&arg1=list&arg2=<?= $this->subListID; ?>" >New List</a>]</li>
                 <?php
-                foreach ($this->arrayLists as $list) {
-                    $name = $list['name'];
-                    $id = $list['id'];
-                    ?><li><a href="index.php?c=ListController&m=direct&arg1=<?=$id?>"><?=$name?></a></li><?php
-                }
+				if (!empty($this->arrayLists))
+				{
+					foreach ($this->arrayLists as $list) {
+						$name = $list['name'];
+						$id = $list['id'];
+						?><li><a href="index.php?c=ListController&m=direct&arg1=<?=$id?>"><?=$name?></a></li><?php
+					}
+				}
                 ?>
             </ul>
         </div>
@@ -58,19 +68,22 @@ class SubListView extends View {
 				<h2>Notes</h2>
                 <li>[<a href="index.php?c=FormController&m=show_form&arg1=note&arg2=<?= $this->subListID; ?>">New Note</a>]</li>
                 <?php
-                foreach ($this->arrayNotes as $note) {
-                    $name = $note['name'];
-                    $date = $note['date'];
-                    $id = $note['id'];
-                    ?>
-					<li>
-						<a href="index.php?c=NoteController&m=present_note&arg1=<?=$id?>$arg2=<?=$this->subListID?>">
-							<?=$name?>
-						</a>
-						<?=$date?>
-					</li>
-					<?php
-                }
+				if (!empty($this->arrayNotes))
+				{
+					foreach ($this->arrayNotes as $note) {
+						$name = $note['name'];
+						$date = $note['date'];
+						$id = $note['id'];
+						?>
+						<li>
+							<a href="index.php?c=NoteController&m=present_note&arg1=<?=$id?>&arg2=<?=$this->subListID?>">
+								<?=$name?>
+							</a>
+							<?=$date?>
+						</li>
+						<?php
+					}
+				}
                 ?>
             </ul>
         </div>

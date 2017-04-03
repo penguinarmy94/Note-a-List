@@ -2,10 +2,9 @@
 namespace jorgeandco\hw3;
 require_once('config.php');
 
-$dbname = 'note_a_list';
-$host .= (":".$port);
+$hostname = Config::host.":".Config::port;
 
-$db = new \mysqli($host, $user, $password);
+$db = new \mysqli($hostname, Config::user, Config::password);
 
 if ($db->connect_error)
 {
@@ -14,13 +13,12 @@ if ($db->connect_error)
 
 echo "connection success\n";
 
-$dbcreate = 'CREATE DATABASE IF NOT EXISTS '.$dbname;
+$dbcreate = 'CREATE DATABASE IF NOT EXISTS '.Config::db;
 
 if ($db->query($dbcreate) === true)
 {
-	echo $dbname." created\n";
-	//$db->query('DROP DATABASE '.$dbname);
-    $db->select_db($dbname);
+	echo Config::db." created\n";
+    $db->select_db(Config::db);
 }
 else
 {
