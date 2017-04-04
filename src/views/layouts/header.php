@@ -5,15 +5,15 @@ require_once('Layout.php');
 
 class Header extends Layout
 {
-	function render($title)
+	function render($data)
 	{
-		$styleDir = getcwd()."/src/styles/styles.css";
+		$styleDir = 'src/styles/styles.css';
 		?>
 			<!doctype html>
 			<html>
 				<head>
-					<title><?=$title?></title>
-					<link rel="stylesheet" type="text/css" href=<?=$styleDir;?>" />
+					<title>Note-A-List: - <?=$data?></title>
+					<link rel="stylesheet" type="text/css" href="<?=$styleDir;?>" />
 				</head>
 				<body>
 		<?php		

@@ -12,7 +12,8 @@ class Navigation extends Element
 	public function renderElement($array)
 	{
 		?>
-			<div><h1>
+			<div class="nav_bar">
+			<h1>
 		<?php
 			switch($array['num_of_elements'])
 			{
@@ -28,10 +29,6 @@ class Navigation extends Element
 					{
 						$this->deep_sub_nav($array['list_titles']);
 					}
-					else
-					{
-						
-					}
 			}
 		?>
 			</h1></div>
@@ -44,6 +41,7 @@ class Navigation extends Element
 		?>			
 			<a href="<?= $action ?>"><?= $array[0]['name'] ?></a>
 		<?php
+		
 	}
 	
 	private function sub_nav($array)
@@ -63,11 +61,13 @@ class Navigation extends Element
 				<span>/</span>
 		<?php
 				}
+				
 			}
+			
 	}
 		
 	private function deep_sub_nav($array)
-	{
+	{	
 		$size = sizeof($array);
 			for ($i = 0; $i < $size; $i++)
 			{
@@ -89,5 +89,6 @@ class Navigation extends Element
 		<?php
 				}
 			}
+			
 	}
 }

@@ -17,7 +17,6 @@ class DisplayNoteView extends View
 	public function __construct($array)
 	{
 		parent::__construct();
-		date_default_timezone_set("America/Los_Angeles");
 		$this->maindir = "index.php?c=ListController&m=direct";
 		$this->nav = $array['nav_items'];
 		if(!empty($array['name']))
@@ -49,7 +48,7 @@ class DisplayNoteView extends View
 			<div>
 				<h2>Note: <?=$this->title?></h2>
 			</div>
-			<div>
+			<div class="note_box">
 				<?= $this->content ?>
 			</div>
 		

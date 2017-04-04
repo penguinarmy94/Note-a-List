@@ -4,8 +4,11 @@ namespace jorgeandco\hw3;
 require_once('src//controllers//ListController.php');
 require_once('src//controllers//FormController.php');
 require_once('src//controllers//NoteController.php');
+require_once('src//configs/Config.php');
 
 use jorgeandco\hw3\controllers as CTR;
+
+date_default_timezone_set(Config::location);
 
 if(!isset($_REQUEST['c']))
 {

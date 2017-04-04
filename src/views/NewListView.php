@@ -39,14 +39,15 @@ class NewListView extends View {
         ?>
         <div>
             <h2>New List</h2>
-            <form name="newList" method="post" action="<?= $this->savedir ?>" />
-                <input type="text" name="name" placeholder="Enter a new list name" />
+            <form name="newList" method="post" action="<?= $this->savedir ?>">
+                <input class="text-box" type="text" name="name" placeholder="Enter a new list name" />
                 <input type="hidden" name="id" value="<?= $this->curr; ?>" />
 				<input type="hidden" name="type" value="list" />
                 <input type="submit" name="addlist" value="Add" />
             </form>
         </div>
         <?php
+		$this->footer->render("");
     }
 
 }

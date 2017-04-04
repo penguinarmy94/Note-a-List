@@ -16,6 +16,19 @@ class UpdateModel extends Model
 		switch($this->mType)
 		{
 			case 'list':
+				
+				$check = "SELECT list_name, parent_id FROM list, list_relationship where list_id = child_id 
+							and list_name = '".$array['name']."' and parent_id = ".$this->mID;
+				
+				if($list = $this->db->query($check))
+				{
+					if(!empty($list) && $list->num_rows != 0)
+					{
+						echo $check;
+						return;
+					}
+				}
+			
 				$query = "INSERT INTO list(list_name) VALUES('".$array['name']."')";
 				$selectid = "SELECT max(list_id) AS list_id FROM list";
 				$query2 = "INSERT INTO list_relationship VALUES(".$this->mID.",";
@@ -49,14 +62,19 @@ class UpdateModel extends Model
 				}
 			break;
 			case 'note':
-				$query = "INSERT INTO note(note_name, note_description, note_date) 
-							VALUES('".$array['name']."','".$array['content']."','".$array['date']."')";
+				$query = 'INSERT INTO note(note_name, note_description, note_date) VALUES("'
+							.$array['name'].
+							'","'
+							.$array['content'].
+							'",STR_TO_DATE("'
+							.$array['date'].'","%Y-%m-%d"))';
 				$selectid = "SELECT max(note_id) AS note_id FROM note";
 				$query2 = "INSERT INTO note_relationship VALUES(".$this->mID.",";
 				
 				if(!$this->db->query($query))
 				{
 					echo $this->db->error;
+					echo '\n'.$query;
 					exit(1);
 				}
 				if($dbquery = $this->db->query($selectid))

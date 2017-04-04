@@ -1,5 +1,6 @@
 <?php
 namespace jorgeandco\hw3\views;
+
 require_once ('view.php');
 require_once ('elements/Navigation.php');
 
@@ -16,7 +17,6 @@ class NewNoteView extends View
 	public function __construct($array)
 	{
 		parent::__construct();
-		date_default_timezone_set("America/Los_Angeles");
 		$this->maindir = "index.php?c=ListController&m=direct";
 		$this->savedir = "index.php?c=FormController&m=submit_form";
 		$this->nav = $array['nav_items'];

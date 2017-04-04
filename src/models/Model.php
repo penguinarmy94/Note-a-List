@@ -1,7 +1,7 @@
 <?php
 namespace jorgeandco\hw3\models;
 
-require_once(getcwd().'\src\configs\config.php');
+require_once(getcwd().'\src\configs\Config.php');
 
 use jorgeandco\hw3 as CFG;
 

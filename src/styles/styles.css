@@ -1,0 +1,24 @@
+div.lists{
+	float:left;
+	max-width:2in;
+}
+h2{
+	margin-bottom:0px;
+	margin-top:0px;
+	-webkit-padding-start: 40px;
+}
+h1{
+	-webkit-padding-start: 40px;
+}
+ul{
+	margin-top:0px;
+}
+div.note_box
+{
+	max-width:4in;
+	padding-left:40px;
+}
+input.text-box
+{
+	margin-left:40px;
+}

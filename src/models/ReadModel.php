@@ -22,11 +22,12 @@ class ReadModel extends Model
 				return $list;
 			break;
 			case 'nav':		
-				$listquery = "SELECT list_id,list_name FROM list WHERE list_id IN (
-							SELECT child_id FROM list_relationship WHERE parent_id = ".$this->mID.") ORDER BY list_name";
+				$listquery = "SELECT list_id,list_name FROM list join list_relationship ON list_id = child_id
+									WHERE parent_id = ". $this->mID." ORDER BY list_name";
+				
 					
-				$notequery = "SELECT note_id,note_name, note_date FROM note WHERE note_id IN (
-							SELECT note_id FROM note_relationship WHERE list_id = ".$this->mID.") ORDER BY note_date, note_name";
+				$notequery = "SELECT N.note_id,note_name,note_date FROM note AS N join note_relationship AS NR ON NR.note_id = N.note_id
+									WHERE NR.list_id = ".$this->mID." ORDER BY note_date DESC";
 					
 				if ($dbquery = $this->db->query($listquery))
 				{
@@ -52,7 +53,7 @@ class ReadModel extends Model
 				$query = "SELECT note_name, note_description FROM note WHERE note_id = ".$array['id'];
 				if ($dbquery = $this->db->query($query))
 				{
-					if($obj = $dbquery->fetch_obj())
+					if($obj = $dbquery->fetch_object())
 					{
 						$list['name'] = $obj->note_name;
 						$list['content'] = $obj->note_description;
