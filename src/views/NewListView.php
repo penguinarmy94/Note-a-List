@@ -1,9 +1,14 @@
 <?php
+/**
+* @author Jorge Aguiniga, Luis Otero
+*/
+
 namespace jorgeandco\hw3\views;
 require_once('View.php');
 require_once('elements//Navigation.php');
 
 use jorgeandco\hw3\views\elements as ELE;
+
 
 class NewListView extends View {
 
