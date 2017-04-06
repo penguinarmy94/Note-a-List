@@ -9,7 +9,7 @@ abstract class Model
 {
 	protected $mID;
 	protected $mType;
-	protected $db;
+	protected static $db;
 	
 	public function __construct($id, $type)
 	{
@@ -17,15 +17,19 @@ abstract class Model
 		$this->mType = $type;
 		
 		$hostname = CFG\Config::host.(':'.CFG\Config::port);
-		$this->connect($hostname, CFG\Config::user, CFG\Config::password, CFG\Config::db);
+		
+		if(empty($db))
+		{
+			self::connect($hostname, CFG\Config::user, CFG\Config::password, CFG\Config::db);
+		}
 		
 	}
 	
-	private function connect ($host, $username, $password, $database)
+	private static function connect ($host, $username, $password, $database)
 	{
-		$this->db = new \mysqli($host, $username, $password, $database);
+		self::$db = new \mysqli($host, $username, $password, $database);
 		
-		if ($this->db->connect_error)
+		if (self::$db->connect_error)
 		{	
 			echo "Could not connect!";
 		}

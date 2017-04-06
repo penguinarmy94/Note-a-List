@@ -20,7 +20,7 @@ class UpdateModel extends Model
 				$check = "SELECT list_name, parent_id FROM list, list_relationship where list_id = child_id 
 							and list_name = '".$array['name']."' and parent_id = ".$this->mID;
 				
-				if($list = $this->db->query($check))
+				if($list = parent::$db->query($check))
 				{
 					if(!empty($list) && $list->num_rows != 0)
 					{
@@ -33,12 +33,12 @@ class UpdateModel extends Model
 				$selectid = "SELECT max(list_id) AS list_id FROM list";
 				$query2 = "INSERT INTO list_relationship VALUES(".$this->mID.",";
 				
-				if(!$this->db->query($query))
+				if(!parent::$db->query($query))
 				{
 					echo $this->db->error;
 					exit(1);
 				}
-				if($dbquery = $this->db->query($selectid))
+				if($dbquery = parent::$db->query($selectid))
 				{
 					if($obj = $dbquery->fetch_object())
 					{
@@ -55,7 +55,7 @@ class UpdateModel extends Model
 					echo "LIST SAVE ERROR ID RELATIONSHIPS!";
 					exit(1);
 				}
-				if(!$this->db->query($query2))
+				if(!parent::$db->query($query2))
 				{
 					echo "LIST SAVE ERROR ID RELATIONSHIPS!";
 					exit(1);
@@ -71,13 +71,13 @@ class UpdateModel extends Model
 				$selectid = "SELECT max(note_id) AS note_id FROM note";
 				$query2 = "INSERT INTO note_relationship VALUES(".$this->mID.",";
 				
-				if(!$this->db->query($query))
+				if(!parent::$db->query($query))
 				{
 					echo $this->db->error;
 					echo '\n'.$query;
 					exit(1);
 				}
-				if($dbquery = $this->db->query($selectid))
+				if($dbquery = parent::$db->query($selectid))
 				{
 					if($obj = $dbquery->fetch_object())
 					{
@@ -94,7 +94,7 @@ class UpdateModel extends Model
 					echo "NOTE SAVE ERROR ID RELATIONSHIPS!";
 					exit(1);
 				}
-				if(!$this->db->query($query2))
+				if(!parent::$db->query($query2))
 				{
 					echo "NOTE SAVE ERROR ID RELATIONSHIPS!";
 					exit(1);

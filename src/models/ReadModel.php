@@ -29,7 +29,7 @@ class ReadModel extends Model
 				$notequery = "SELECT N.note_id,note_name,note_date FROM note AS N join note_relationship AS NR ON NR.note_id = N.note_id
 									WHERE NR.list_id = ".$this->mID." ORDER BY note_date DESC";
 					
-				if ($dbquery = $this->db->query($listquery))
+				if ($dbquery = parent::$db->query($listquery))
 				{
 					$i = 0;
 					while($obj = $dbquery->fetch_object())
@@ -38,7 +38,7 @@ class ReadModel extends Model
 					}
 					$dbquery->close();
 				}
-				if ($dbquery = $this->db->query($notequery))
+				if ($dbquery = parent::$db->query($notequery))
 				{
 					while($obj = $dbquery->fetch_object())
 					{
@@ -46,12 +46,11 @@ class ReadModel extends Model
 					}
 					$dbquery->close();
 				}
-				$this->db->close();
 			break;
 			case 'note':
 			
 				$query = "SELECT note_name, note_description FROM note WHERE note_id = ".$array['id'];
-				if ($dbquery = $this->db->query($query))
+				if ($dbquery = parent::$db->query($query))
 				{
 					if($obj = $dbquery->fetch_object())
 					{
@@ -79,7 +78,7 @@ class ReadModel extends Model
 			$query = "SELECT list_id, list_name FROM list WHERE list_id = 
 						(SELECT parent_id FROM list_relationship WHERE child_id = ";
 			
-			if ($dbquery = $this->db->query($query.$this->mID.")")) //list item exists
+			if ($dbquery = parent::$db->query($query.$this->mID.")")) //list item exists
 			{
 				$obj = $dbquery->fetch_object();
 				$parentName = $obj->list_name;
@@ -87,7 +86,7 @@ class ReadModel extends Model
 				$dbquery->close();
 				if($parentID != $array0['id']) //sublist 3 or more levels
 				{	
-					if($dbquery = $this->db->query($query.$parentID.")"))
+					if($dbquery = parent::$db->query($query.$parentID.")"))
 					{
 						$obj = $dbquery->fetch_object();
 						if ($obj->list_id != $array0['id']) //sublist more than 3 levels
@@ -131,7 +130,7 @@ class ReadModel extends Model
 		
 		$namequery = "SELECT list_name, list_id FROM list WHERE list_Id = ".$this->mID;
 		
-		if($dbquery = $this->db->query($namequery))
+		if($dbquery = parent::$db->query($namequery))
 		{
 			$obj = $dbquery->fetch_object();
 			$array = ['name'=>$obj->list_name, 'id'=>$obj->list_id];
