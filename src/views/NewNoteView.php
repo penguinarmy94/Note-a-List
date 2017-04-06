@@ -68,12 +68,12 @@ class NewNoteView extends View
 			<div>
 				<h2>New Note</h2>
 			</div>
-			<div>
+			<div class="form_div">
 				<form name="newNote" action="<?= $this->savedir ?>" method="post">
 					Title: <input type="text" name="title"/><br>
 					Note<br>
 					<textarea rows='8' cols='30' name="note"></textarea><br>
-					<input type="submit" name="addnote" value="save" />
+					<input class="save" type="submit" name="addnote" value="save" />
 					<input type="hidden" name="type" value="note" />
 					<input type="hidden" name="id" value=<?=$this->curr?> />
 				</form>
