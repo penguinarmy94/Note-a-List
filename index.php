@@ -68,8 +68,6 @@ if (isset($_POST['addlist']))
 	header("Location: index.php?c=ListController&m=direct&arg1=".$_POST['id']);
 }
 
-$filteredTitle = filter_var($_POST['title'], 513);
-$filteredContent = filter_var($_POST['note'], 513);
 //checks if there is a new note to be saved into the database
 if (isset($_POST['addnote']))
 {
