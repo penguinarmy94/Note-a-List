@@ -57,7 +57,7 @@ if (isset($_POST['addlist']))
 	//checks if the name variable is not empty
 	if (!empty($filteredData))
 	{
-		$data['name'] = $_POST['name'];
+		$data['name'] = $filteredData;
 		$data['id'] = $_POST['id'];
 		$method = $_REQUEST['m'];
 		$class = 'jorgeandco\\hw3\\controllers\\'.$_REQUEST['c'];
@@ -68,8 +68,6 @@ if (isset($_POST['addlist']))
 	header("Location: index.php?c=ListController&m=direct&arg1=".$_POST['id']);
 }
 
-$filteredTitle = filter_var($_POST['title'], 513);
-$filteredContent = filter_var($_POST['note'], 513);
 //checks if there is a new note to be saved into the database
 if (isset($_POST['addnote']))
 {
@@ -79,8 +77,8 @@ if (isset($_POST['addnote']))
 	//checks if the the title and note variables are not empty
 	if (!empty($filteredTitle) && !empty($filteredContent))
 	{
-		$data['name'] = $_POST['title'];
-		$data['content'] = $_POST['note'];
+		$data['name'] = $filteredTitle;
+		$data['content'] = $filteredContent;
 		$data['id'] = $_POST['id'];
 		$data['date'] = date("Y-m-d");
 		$method = $_REQUEST['m'];
