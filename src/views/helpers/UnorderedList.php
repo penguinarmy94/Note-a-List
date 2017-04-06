@@ -1,36 +1,52 @@
 <?php
+/**
+* @author Jorge Aguiniga, Luis Otero
+*/
 namespace jorgeandco\hw3\views\helpers;
 
 require_once('Helper.php');
 
+/**
+* Helper class for drawing unordered lists for the landing and sub list pages
+*/
 class UnorderedList extends Helper
 {
+	/**
+    *   Constructor for the UnorderedList class
+    */
 	public function __construct()
 	{
 		parent::__construct();
 	}
-	
+
+	/**
+	*	Renders the unordered list on the web browser
+	*	@param String $type (the type of unordered list to draw, value 'list' for drawing the child lists list, value 'note' for drawing the note list)
+	*	@param array $dataArray (the array containing the names and IDs of the objects to be displayed)
+	*/
 	public function draw($type, $dataArray)
 	{
+		//if the type is 'list', draw the child list
 		if(strcmp($type, "list") == 0)
 		{
 			$this->draw_child_list($dataArray);
 		}
+		//if the type is 'note', draw the note list
 		else if (strcmp($type, "note") == 0)
 		{
 			$this->draw_note_list($dataArray);
 		}
-		else if (strcmp($type, "ln") == 0)
-		{
-			$this->draw_child_list($dataArray);
-			$this->draw_note_list($dataArray);
-		}
+		//defualt case if type entered is not supported
 		else
 		{
 			$this->no_list();
 		}
 	}
-	
+
+	/**
+	*	helper function to render the child list
+	*	@param array $data (the array containing the names and IDs of the children lists to be displayed)
+	*/
 	private function draw_child_list($data)
 	{
 		?>
@@ -49,7 +65,11 @@ class UnorderedList extends Helper
         </ul>
 		<?php
 	}
-	
+
+	/**
+	*	helper function to render the note list
+	*	@param array $data (the array containing the names and IDs of the notes to be displayed)
+	*/
 	private function draw_note_list($data)
 	{
 		?>
@@ -77,7 +97,10 @@ class UnorderedList extends Helper
 		</ul>
 		<?php
 	}
-	
+
+	/**
+	*	helper function to render a non attribute list caused by an unsuppoerted type
+	*/
 	private function no_list()
 	{
 		?>

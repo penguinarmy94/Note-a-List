@@ -1,10 +1,19 @@
 <?php
+/**
+* @author Jorge Aguiniga, Luis Otero
+*/
 namespace jorgeandco\hw3\views\helpers;
 
-class Helper 
+/**
+*   Abstract Helper class
+*/
+abstract class Helper
 {
+    /**
+    *   Constructor for the abstract Helper class
+    */
 	public function __construct()
 	{
-		
+
 	}
 }
