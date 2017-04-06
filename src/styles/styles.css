@@ -2,6 +2,16 @@ div.lists{
 	float:left;
 	max-width:2in;
 }
+div.form_div {
+    -webkit-padding-start: 40px;
+    width: 3in;
+    float:left;
+}
+div.note_box
+{
+    max-width:4in;
+    padding-left:40px;
+}
 h2{
 	margin-bottom:0px;
 	margin-top:0px;
@@ -13,12 +23,7 @@ h1{
 ul{
 	margin-top:0px;
 }
-div.note_box
-{
-	max-width:4in;
-	padding-left:40px;
-}
-input.text-box
-{
-	margin-left:40px;
+input.save{
+    position:relative;
+    left:35%;
 }

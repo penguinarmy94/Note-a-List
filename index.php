@@ -57,7 +57,7 @@ if (isset($_POST['addlist']))
 	//checks if the name variable is not empty
 	if (!empty($filteredData))
 	{
-		$data['name'] = $filteredData;
+		$data['name'] = $filteredData;;
 		$data['id'] = $_POST['id'];
 		$method = $_REQUEST['m'];
 		$class = 'jorgeandco\\hw3\\controllers\\'.$_REQUEST['c'];
